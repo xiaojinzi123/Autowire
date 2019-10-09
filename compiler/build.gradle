@@ -1,0 +1,29 @@
+apply plugin: 'java-library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.xiaojinzi123'
+
+archivesBaseName = "component-compiler"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
+
+dependencies {
+    implementation 'com.google.auto.service:auto-service:1.0-rc4'
+    implementation 'com.squareup:javapoet:1.11.1'
+    implementation 'org.apache.commons:commons-lang3:3.4'
+    implementation 'org.apache.commons:commons-collections4:4.1'
+    if (Boolean.parseBoolean(rootProject.ext.isDependMavenOnline)) {
+        // compile libs.component_annotation
+    }else {
+        compile project(':anno')
+    }
+}
+
+repositories {
+    mavenCentral()
+}
